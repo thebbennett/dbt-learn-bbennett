@@ -19,7 +19,7 @@ with customers as (
 
         count(order_id) as number_of_orders,
 
-        sum(amount) as lifetime_value
+        sum(amount_total_usd) as lifetime_value
 
     from orders
 

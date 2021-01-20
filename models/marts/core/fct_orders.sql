@@ -13,7 +13,7 @@ with  orders as (
 
     order_id,
 
-    sum(amount_usd) as amount
+    sum(case when status = 1 then amount_usd end) as amount_total_usd
 
   from stripe_payments
 
@@ -29,7 +29,7 @@ with  orders as (
 
         orders.order_date,
 
-        coalesce(order_totals.amount, 0) as amount
+        coalesce(order_totals.amount_total_usd, 0) as amount_total_usd
 
     from orders
 
