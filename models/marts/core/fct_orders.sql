@@ -11,15 +11,11 @@ with  orders as (
 
   select
 
-    orders.order_id,
+    order_id,
 
-    sum(stripe_payments.amount_usd) as order_amount
+    sum(amount_usd) as amount
 
-  from orders
-
-  left join stripe_payments
-
-      on orders.order_id = stripe_payments.order_id
+  from stripe_payments
 
   group by 1
 
@@ -31,13 +27,15 @@ with  orders as (
 
         orders.customer_id,
 
-        order_totals.order_amount
+        orders.order_date,
 
-    from order_totals
+        coalesce(order_totals.amount, 0) as amount
 
-    left join orders
+    from orders
 
-      on order_totals.order_id = orders.order_id
+    left join order_totals
+
+      on orders.order_id = order_totals.order_id
 
 )
 

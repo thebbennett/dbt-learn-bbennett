@@ -1,11 +1,11 @@
 version: 2
 
 sources:
-    - name: sunrise
+    - name: stripe
       description: A clone of a Redshift application database.
-      database: dev
+      database: raw
       tables:
-        - name: stripe_payments
+        - name: payment
           description: Raw Stripe payment data
           loaded_at_field: created
           freshness:
@@ -17,4 +17,3 @@ sources:
               tests:
                 - unique
                 - not_null
-            
