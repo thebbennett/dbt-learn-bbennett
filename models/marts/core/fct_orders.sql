@@ -13,7 +13,7 @@ with  orders as (
 
     order_id,
 
-    sum(case when status = 'success' then amount_usd end) as amount_total_usd
+    sum(case when payment_status = 'success' then amount_usd end) as amount_total_usd
 
   from stripe_payments
 
