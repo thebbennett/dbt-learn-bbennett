@@ -36,9 +36,7 @@ with  orders as (
     left join order_totals
 
       on orders.order_id = order_totals.order_id
-
-      where orders.order_status = 'completed'
-
+      
 )
 
 select * from final
