@@ -13,7 +13,7 @@ with  orders as (
 
     order_id,
 
-    sum(case when status = 1 then amount_usd end) as amount_total_usd
+    sum(case when status = 'success' then amount_usd end) as amount_total_usd
 
   from stripe_payments
 
@@ -23,7 +23,7 @@ with  orders as (
 
     select
 
-        order_totals.order_id,
+        orders.order_id,
 
         orders.customer_id,
 

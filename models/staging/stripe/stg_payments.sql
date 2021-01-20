@@ -1,16 +1,16 @@
 select
 
 
-  ID as payment_id,
+  id as payment_id,
 
-  ORDERID as order_id,
+  orderid as order_id,
 
-  PAYMENTMETHOD as payment_method,
+  paymentmethod as payment_method,
 
-  case when status = 'success' then 1 else 0 end as payment_status,
+  status as payment_status,
 
-  AMOUNT::decimal / 100::decimal as amount_usd,
+  amount::decimal / 100::decimal as amount_usd,
 
-  CREATED as created_at
+  created as created_at
 
 from {{ source('stripe','payment') }}
