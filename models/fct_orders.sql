@@ -6,21 +6,38 @@ with  orders as (
 
     select * from {{ ref('stg_payments')}}
 
+
+), order_totals as (
+
+  select
+
+    order_id,
+
+    sum(amount_usd) as order_amount
+
+  from orders
+
+  left join stripe_payments
+
+      on order_totals.order_id = stripe_payments.order_id
+
+  group by 1
+
 ), final as (
 
     select
 
-        orders.order_id,
+        order_totals.order_id,
 
         orders.customer_id,
 
-        stripe_payments.amount_usd
+        sum(stripe_payments.order_amount)
 
-    from orders
+    from order_totals
 
-    left join stripe_payments
+    left join orders
 
-        on orders.order_id = stripe_payments.order_id
+      on order_totals.order_id = orders.order_id
 
 )
 
