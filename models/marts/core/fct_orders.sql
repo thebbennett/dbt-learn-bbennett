@@ -37,6 +37,8 @@ with  orders as (
 
       on orders.order_id = order_totals.order_id
 
+      where orders.order_status = 'completed'
+
 )
 
 select * from final
