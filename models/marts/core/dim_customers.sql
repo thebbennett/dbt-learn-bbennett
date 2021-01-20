@@ -16,7 +16,7 @@ with customers as (
 
        orders.customer_id,
 
-       sum(case when status = 1 then payments.amount) as lifetime_value
+       sum(case when payments.payment_status = 1 then payments.amount_usd end) as lifetime_value
 
     from orders
 
